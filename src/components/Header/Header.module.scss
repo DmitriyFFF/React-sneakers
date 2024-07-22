@@ -1,23 +1,28 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-
-  .headerLeft {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  border-bottom: 1px solid #eaeaea;
 
   .logo {
     width: 40px;
     height: 40px;
+    margin-right: 16px;
   }
 
-  .headerRight {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .title,
+  .text {
+    margin: 0;
   }
+
+  .text,
+  .price,
+  .profile {
+    font-size: 14px;
+  }
+
+  // .headerRight {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
 }
 
 

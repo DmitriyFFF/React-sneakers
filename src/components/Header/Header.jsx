@@ -3,22 +3,22 @@ import styles from './Header.module.scss';
 
 export const Header = () => {
   return (
-    <header className={styles.header}>
-      <div className={styles.headerLeft}>
+    <header className={`${styles.header} d-flex justify-between align-center p-40`}>
+      <div className={`${styles.headerLeft} d-flex`}>
         <img className={styles.logo} src="/img/logo.png" alt="логотип" />
         <div className={styles.headerInfo}>
-          <h3 className={styles.title}>REACT SNEAKERS</h3>
-          <p className={styles.text}>Магазин лучших кроссовок</p>
+          <h3 className={`${styles.title} text-uppercase`}>React sneakers</h3>
+          <p className={`${styles.text} opacity-5`}>Магазин лучших кроссовок</p>
         </div>
       </div>
-      <ul className={styles.headerRight}>
-        <li>
-          <img className={styles.icon} src='/img/cart.svg' alt='корзина' />
-          <span>1205 руб.</span>
+      <ul className='d-flex'>
+        <li className='d-flex align-center mr-30'>
+          <img className={`${styles.icon} mr-10`} src='/img/cart.svg' alt='корзина' />
+          <span className={styles.price}>1205 руб.</span>
         </li>
-        <li>
-          <img className={styles.icon} src='/img/user.svg' alt='профиль пользователя' />
-          <span>Профиль</span>
+        <li className='d-flex align-center'>
+          <img className={`${styles.icon} mr-10`} src='/img/user.svg' alt='профиль пользователя' />
+          <span className={`${styles.profile} opacity-6`}>Профиль</span>
         </li>
       </ul>
     </header>
