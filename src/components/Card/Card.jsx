@@ -3,6 +3,9 @@ import styles from './Card.module.scss';
 export const Card = () => {
   return (
     <div className={styles.card}>
+      <div className={styles.favorite}>
+        <img src="./img/heart_unliked.svg" alt="Unliked" />
+      </div>
       <img className={styles.cardImage} src="./img/sneakers/sn1.jpg" alt="Кроссовки" />
       <h4 className={styles.cardName}>Мужские Кроссовки Nike Blazer Mid Suede</h4>
       <div className='d-flex justify-between align-center'>

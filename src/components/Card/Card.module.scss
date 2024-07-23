@@ -3,6 +3,18 @@
   border: 1px solid #f3f3f3;
   padding: 20px;
   border-radius: 40px;
+  transition: box-shadow .2s ease-in-out, transform .2s ease-in-out;
+  // cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.06);
+    transform: translateY(-5px);
+  }
+
+  .favorite {
+    position: absolute;
+    cursor: pointer;
+  }
 
   .cardImage {
     width: 133px;
