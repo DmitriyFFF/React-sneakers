@@ -1,22 +1,23 @@
 import styles from './Card.module.scss';
 
-export const Card = () => {
+export const Card = ({data}) => {
+  const { name, imageUrl, price } = data;
   return (
-    <div className={styles.card}>
+    <li className={styles.card}>
       <div className={styles.favorite}>
         <img src="./img/heart_unliked.svg" alt="Unliked" />
       </div>
-      <img className={styles.cardImage} src="./img/sneakers/sn1.jpg" alt="Кроссовки" />
-      <h4 className={styles.cardName}>Мужские Кроссовки Nike Blazer Mid Suede</h4>
+      <img className={styles.cardImage} src={imageUrl} alt="Кроссовки" />
+      <h4 className={styles.cardName}>{name}</h4>
       <div className='d-flex justify-between align-center'>
         <div className='d-flex flex-column'>
           <span className={`${styles.spanPrice} text-uppercase`}>Цена</span>
-          <b>12 999 руб.</b>
+          <b>{price} руб.</b>
         </div>
         <button className={styles.addButton}>
           <img className={styles.btnImage} src="./img/plus.svg" alt="Плюс" />
         </button>
       </div>
-    </div>
+    </li>
   );
 }

@@ -1,3 +1,4 @@
+import { cardsData } from '../../utils/constants';
 import { Card } from '../Card/Card';
 import styles from './Cards.module.scss';
 
@@ -11,8 +12,11 @@ export const Cards = () => {
           <input className={styles.input} placeholder='Поиск...' type="text" />
         </div>
       </div>
-
-      <Card />
+      <ul className={`${styles.cards} d-flex`}>
+        {cardsData.map((card) =>
+          <Card data={card} key={card.imageUrl} />
+        )}
+      </ul>
     </div>
   )
 }
