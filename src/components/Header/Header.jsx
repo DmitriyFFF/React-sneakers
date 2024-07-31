@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Header.module.scss';
 
-export const Header = () => {
+export const Header = ({onOpenCart}) => {
   return (
     <header className={`${styles.header} d-flex justify-between align-center p-40`}>
       <div className={`${styles.headerLeft} d-flex`}>
@@ -12,7 +12,7 @@ export const Header = () => {
         </div>
       </div>
       <ul className='d-flex'>
-        <li className='d-flex align-center mr-30'>
+        <li className='d-flex align-center mr-30 cu-p' onClick={onOpenCart}>
           <img className={`${styles.icon} mr-10`} src='/img/cart.svg' alt='корзина' />
           <span className={styles.price}>1205 руб.</span>
         </li>

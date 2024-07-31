@@ -1,11 +1,13 @@
 import styles from './Sidebar.module.scss';
 
-export const Sidebar = () => {
+export const Sidebar = ({onClose}) => {
   return (
     <div className={styles.container}>
       <div className={styles.overlay}>
         <div className={`${styles.content} d-flex flex-column`}>
-          <h2 className={`${styles.title} mb-30`}>Корзина</h2>
+          <h2 className={`${styles.title} d-flex justify-between align-center mb-30`}>Корзина
+            <img className='cu-p' src="./img/removeBtn.svg" alt="Close" onClick={onClose}/>
+          </h2>
           <ul className={styles.cartItems}>
             <li className={`${styles.cartItem} d-flex align-center mb-20`}>
               <img className={styles.image} src="./img/sneakers/sn1.jpg" alt="" />

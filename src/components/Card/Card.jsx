@@ -1,7 +1,12 @@
+import React, { useState } from 'react';
 import styles from './Card.module.scss';
 
 export const Card = ({data}) => {
+  const [isChecked, setIsChecked] = useState(false);
   const { name, imageUrl, price } = data;
+  const handleCheck = () => {
+    setIsChecked(!isChecked);
+  }
   return (
     <li className={styles.card}>
       <div className={styles.favorite}>
@@ -14,9 +19,9 @@ export const Card = ({data}) => {
           <span className={`${styles.spanPrice} text-uppercase`}>Цена</span>
           <b>{price} руб.</b>
         </div>
-        <button className={styles.addButton}>
-          <img className={styles.btnImage} src="./img/plus.svg" alt="Плюс" />
-        </button>
+        <img className={styles.btnImage} onClick={handleCheck} src={isChecked ? "./img/check.svg" : "./img/plus.svg"} alt="Плюс" />
+        {/* <div className={`${styles.addButton} d-flex`}>
+        </div> */}
       </div>
     </li>
   );

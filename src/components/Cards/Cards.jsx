@@ -12,7 +12,7 @@ export const Cards = () => {
           <input className={styles.input} placeholder='Поиск...' type="text" />
         </div>
       </div>
-      <ul className={`${styles.cards} d-flex`}>
+      <ul className={`${styles.cards} d-flex justify-center`}>
         {cardsData.map((card) =>
           <Card data={card} key={card.imageUrl} />
         )}
