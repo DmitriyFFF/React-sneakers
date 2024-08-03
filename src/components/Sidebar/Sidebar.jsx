@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.scss';
 
-export const Sidebar = ({onClose}) => {
+export const Sidebar = ({onClose, items = []}) => {
   return (
     <div className={styles.container}>
       <div className={styles.overlay}>
@@ -9,17 +9,20 @@ export const Sidebar = ({onClose}) => {
             <img className='cu-p' src="./img/removeBtn.svg" alt="Close" onClick={onClose}/>
           </h2>
           <ul className={styles.cartItems}>
-            <li className={`${styles.cartItem} d-flex align-center mb-20`}>
-              <img className={styles.image} src="./img/sneakers/sn1.jpg" alt="" />
-              <div className={styles.itemInfo}>
-                <p className={styles.itemName}>Мужские Кроссовки Nike Blazer Mid Suede</p>
-                <b className={styles.itemPrice}>12 999 руб.</b>
-              </div>
-              <button className={styles.removeButton}>
-                <img className={styles.btnImage} src="./img/removeBtn.svg" alt="Remove" />
-              </button>
-            </li>
-            <li className={`${styles.cartItem} d-flex align-center mb-20`}>
+            {items.map(item => (
+              <li className={`${styles.cartItem} d-flex align-center mb-20`} key={item.imageUrl}>
+                <img className={styles.image} src={item.imageUrl} alt="" />
+                <div className={styles.itemInfo}>
+                  <p className={styles.itemName}>{item.name}</p>
+                  <b className={styles.itemPrice}>{item.price} руб.</b>
+                </div>
+                <button className={styles.removeButton}>
+                  <img className={styles.btnImage} src="./img/removeBtn.svg" alt="Remove" />
+                </button>
+              </li>
+            ))}
+
+            {/* <li className={`${styles.cartItem} d-flex align-center mb-20`}>
               <img className={styles.image}src="./img/sneakers/sn2.jpg" alt="" />
               <div className={styles.itemInfo}>
                 <p className={styles.itemName}>Мужские Кроссовки Nike Air Max 270</p>
@@ -28,7 +31,7 @@ export const Sidebar = ({onClose}) => {
               <button className={styles.removeButton}>
                 <img className={styles.btnImage} src="./img/removeBtn.svg" alt="Remove" />
               </button>
-            </li>
+            </li> */}
           </ul>
           <div>
             <ul className='mb-25'>

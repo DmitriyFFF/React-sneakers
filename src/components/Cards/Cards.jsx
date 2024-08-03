@@ -1,8 +1,11 @@
-import { cardsData } from '../../utils/constants';
+// import { cardsData } from '../../utils/constants';
 import { Card } from '../Card/Card';
 import styles from './Cards.module.scss';
 
-export const Cards = () => {
+export const Cards = ({items, onAddCart}) => {
+  // const handleAddCart = (card) => {
+  //   console.log(card)
+  // }
   return (
     <div className={`${styles.content} d-flex flex-column p-40`}>
       <div className='d-flex justify-between align-center mb-30'>
@@ -13,8 +16,15 @@ export const Cards = () => {
         </div>
       </div>
       <ul className={`${styles.cards} d-flex justify-center`}>
-        {cardsData.map((card) =>
-          <Card data={card} key={card.imageUrl} />
+        {items.map((item) =>
+          <Card
+            name={item.name}
+            imageUrl={item.imageUrl}
+            price={item.price}
+            key={item.imageUrl}
+            onPlus={(card) => {onAddCart(card)}}
+            onFavorite={() => {console.log('favorite')}}
+          />
         )}
       </ul>
     </div>
