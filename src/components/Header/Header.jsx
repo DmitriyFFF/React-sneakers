@@ -13,11 +13,11 @@ export const Header = ({onOpenCart}) => {
       </div>
       <ul className='d-flex'>
         <li className='d-flex align-center mr-30 cu-p' onClick={onOpenCart}>
-          <img className={`${styles.icon} mr-10`} src='/img/cart.svg' alt='корзина' />
+          <img className={`${styles.icon} mr-10`} src='/img/cart.svg' alt='Корзина' />
           <span className={styles.price}>1205 руб.</span>
         </li>
         <li className='d-flex align-center'>
-          <img className={`${styles.icon} mr-10`} src='/img/user.svg' alt='профиль пользователя' />
+          <img className={`${styles.icon} mr-10`} src='/img/user.svg' alt='Профиль пользователя' />
           <span className={`${styles.profile} opacity-6`}>Профиль</span>
         </li>
       </ul>

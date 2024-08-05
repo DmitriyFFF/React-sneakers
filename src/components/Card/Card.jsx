@@ -3,6 +3,8 @@ import styles from './Card.module.scss';
 
 export const Card = ({name, imageUrl, price, onPlus, onFavorite}) => {
   const [isChecked, setIsChecked] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
   // const { name, imageUrl, price } = data;
 
   const handleCheck = () => {
@@ -10,10 +12,18 @@ export const Card = ({name, imageUrl, price, onPlus, onFavorite}) => {
     setIsChecked(!isChecked);
   };
 
+  const handleLike = () => {
+    onFavorite({ name, imageUrl, price });
+    setIsFavorite(!isFavorite);
+  };
+
   return (
     <li className={styles.card}>
       <div className={styles.favorite}>
-        <img src="./img/heart_unliked.svg" alt="Лайк" />
+        <img
+          onClick={handleLike}
+          src={isFavorite ? "./img/heart_liked.svg" : "./img/heart_unliked.svg"}
+          alt="Лайк" />
       </div>
       <img className={styles.cardImage} src={imageUrl} alt="Кроссовки" />
       <h4 className={styles.cardName}>{name}</h4>
