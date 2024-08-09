@@ -26,6 +26,56 @@
     margin: 0;
   }
 
+  .emptyCartImage {
+    width: 120px;
+    height: 120px;
+  }
+
+  .emptyCartTitle {
+    font-size: 22px;
+    margin: 0;
+  }
+
+  .emptyCartText {
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+    margin-top: 9px;
+  }
+
+  .btnBack {
+    position: relative;
+    width: 100%;
+    max-width: 245px;
+    height: 55px;
+    background: #9DD458;
+    border: none;
+    border-radius: 18px;
+    padding: 18px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+
+    .arrowBack {
+      position: absolute;
+      left: 31px;
+      transform: rotate(180deg);
+    }
+
+    &:hover {
+      background: lighten(#9DD458, 5%);
+      .arrowBack {
+        transform: rotate(180deg) translateX(5px);
+      }
+    }
+
+    &:active {
+      background: darken(#9DD458, 5%);
+    }
+  }
+
   .cartItems {
     flex: 1;
     overflow: auto;

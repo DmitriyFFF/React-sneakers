@@ -16,7 +16,11 @@ export const Header = ({onOpenCart}) => {
           <img className={`${styles.icon} mr-10`} src='/img/cart.svg' alt='Корзина' />
           <span className={styles.price}>1205 руб.</span>
         </li>
-        <li className='d-flex align-center'>
+        <li className='d-flex align-center mr-30 cu-p'>
+          <img className={`${styles.icon} mr-10`} src='/img/favorite.svg' alt='Закладки' />
+          <span className={`${styles.profile} opacity-6`}>Закладки</span>
+        </li>
+        <li className='d-flex align-center cu-p'>
           <img className={`${styles.icon} mr-10`} src='/img/user.svg' alt='Профиль пользователя' />
           <span className={`${styles.profile} opacity-6`}>Профиль</span>
         </li>
