@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Routes, Route } from 'react-router-dom';
 
+import { Home } from '../../pages/Home';
 import { Header } from '../Header/Header';
-import { Cards } from '../Cards/Cards';
+// import { Cards } from '../Cards/Cards';
 import { Sidebar } from '../Sidebar/Sidebar';
 
 import styles from './App.module.scss';
 import { cardsData } from '../../utils/constants';
+import { Favorites } from '../../pages/Favorites';
 
 
 export const App = () => {
@@ -25,6 +28,9 @@ export const App = () => {
 
     axios.get('https://66abc54ff009b9d5c73049f1.mockapi.io/cart')
       .then(res => setCartItems(res.data));
+
+    axios.get('https://66abc54ff009b9d5c73049f1.mockapi.io/favorites')
+      .then(res => setFavorites(res.data));
   }, []);
 
   const handleAddCart = (card) => {
@@ -52,7 +58,18 @@ export const App = () => {
         />
       }
       <Header onOpenCart={() => setIsOpened(true)} />
-      <Cards items={items} onAddCart={handleAddCart} onAddFavorite={handleAddFavorites} />
+      <Routes>
+        <Route path='/' element={
+          <Home
+            items={items}
+            onAddCart={handleAddCart}
+            onAddFavorite={handleAddFavorites}
+          />
+        }/>
+        <Route path='/favorites' element={
+          <Favorites items={favorites} onAddFavorite={handleAddFavorites} />}
+        />
+      </Routes>
     </div>
   );
 }

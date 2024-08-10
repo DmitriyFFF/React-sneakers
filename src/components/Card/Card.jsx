@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styles from './Card.module.scss';
 
-export const Card = ({name, imageUrl, price, onPlus, onFavorite}) => {
+export const Card = ({name, imageUrl, price, onPlus, onFavorite, isLiked = false}) => {
   const [isChecked, setIsChecked] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(isLiked);
 
   // const { name, imageUrl, price } = data;
 
