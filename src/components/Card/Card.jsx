@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Card.module.scss';
 
-export const Card = ({name, imageUrl, price, onPlus, onFavorite, isLiked = false}) => {
+export const Card = ({id, name, imageUrl, price, onPlus, onFavorite, isLiked = false}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isFavorite, setIsFavorite] = useState(isLiked);
 
@@ -13,7 +13,7 @@ export const Card = ({name, imageUrl, price, onPlus, onFavorite, isLiked = false
   };
 
   const handleLike = () => {
-    onFavorite({ name, imageUrl, price });
+    onFavorite({ id, name, imageUrl, price });
     setIsFavorite(!isFavorite);
   };
 

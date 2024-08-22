@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
 
-import { Home } from '../../pages/Home';
+import { Home } from '../../pages/Home/Home';
 import { Header } from '../Header/Header';
 // import { Cards } from '../Cards/Cards';
 import { Sidebar } from '../Sidebar/Sidebar';
 
 import styles from './App.module.scss';
 import { cardsData } from '../../utils/constants';
-import { Favorites } from '../../pages/Favorites';
+import { Favorites } from '../../pages/Favorites/Favorites';
 
 
 export const App = () => {
@@ -35,17 +35,27 @@ export const App = () => {
 
   const handleAddCart = (card) => {
     axios.post('https://66abc54ff009b9d5c73049f1.mockapi.io/cart', card);
-    setCartItems(prev => [...prev, card]);
+    setCartItems((prev) => [...prev, card]);
   };
 
   const handleDeleteFromCart = (id) => {
     axios.delete(`https://66abc54ff009b9d5c73049f1.mockapi.io/cart/${id}`);
-    setCartItems(prev => prev.filter(item => item.id !== id));
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const handleAddFavorites = (card) => {
-    axios.post('https://66abc54ff009b9d5c73049f1.mockapi.io/favorites', card);
-    setFavorites(prev => [...prev, card]);
+  const handleAddFavorites = async(card) => {
+    try {
+      if (favorites.find(item => item.id === card.id)) {
+        axios.delete(`https://66abc54ff009b9d5c73049f1.mockapi.io/favorites/${card.id}`);
+        setFavorites((prev) => prev.filter((item) => item.id !== card.id));
+      } else {
+        const res = await axios.post('https://66abc54ff009b9d5c73049f1.mockapi.io/favorites', card);
+        setFavorites((prev) => [...prev, res.data]);
+      }
+    } catch (error) {
+      alert('Не удалось добавить в закладки!');
+      console.log(error);
+    }
   };
 
   return (
@@ -62,12 +72,14 @@ export const App = () => {
         <Route path='/' element={
           <Home
             items={items}
-            onAddCart={handleAddCart}
-            onAddFavorite={handleAddFavorites}
+            handleAddCart={handleAddCart}
+            handleAddFavorites={handleAddFavorites}
           />
         }/>
         <Route path='/favorites' element={
-          <Favorites items={favorites} onAddFavorite={handleAddFavorites} />}
+          <Favorites
+            items={favorites}
+            onAddFavorite={handleAddFavorites} />}
         />
       </Routes>
     </div>
