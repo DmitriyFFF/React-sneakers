@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Card } from '../Card/Card';
 import styles from './Cards.module.scss';
 
-export const Cards = ({items, onAddCart, onAddFavorite}) => {
+export const Cards = ({items, cartItems, onAddCart, onAddFavorite}) => {
   const [serchValue, setSearchValue] = useState('');
 
   const handleChangeInput = (event) => {
@@ -48,8 +48,10 @@ export const Cards = ({items, onAddCart, onAddFavorite}) => {
             name={item.name}
             imageUrl={item.imageUrl}
             price={item.price}
-            onPlus={(card) => {onAddCart(card)}}
-            onFavorite={(card) => {onAddFavorite(card)}}
+            isAdded={cartItems.some(cartItem => Number(cartItem.id) === Number(item.id))}
+            onPlus={onAddCart}
+            onFavorite={onAddFavorite}
+            // isLoading
           />
         )}
       </ul>

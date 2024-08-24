@@ -14,7 +14,7 @@ export const Header = ({onOpenCart}) => {
       </Link>
       <ul className='d-flex'>
         <li onClick={onOpenCart}>
-          <Link to='/cart' className='d-flex align-center mr-30'>
+          <Link to='/' className='d-flex align-center mr-30'>
             <img className={`${styles.icon} mr-10`} src='/img/cart.svg' alt='Корзина' />
             <span className={styles.price}>1205 руб.</span>
           </Link>

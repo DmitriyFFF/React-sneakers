@@ -12,7 +12,7 @@ export const Sidebar = ({onClose, onRemove, items = []}) => {
             <>
               <ul className={styles.cartItems}>
                 {items.map(item => (
-                  <li className={`${styles.cartItem} d-flex align-center mb-20`} key={item.imageUrl}>
+                  <li className={`${styles.cartItem} d-flex align-center mb-20`} key={item.id}>
                     <img className={styles.image} src={item.imageUrl} alt="Кроссовки" />
                     <div className={styles.itemInfo}>
                       <p className={styles.itemName}>{item.name}</p>
