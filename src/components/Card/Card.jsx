@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ContentLoader from 'react-content-loader';
+import { AppContext } from '../../utils/context/context';
 import styles from './Card.module.scss';
 
 export const Card = ({
@@ -10,17 +11,16 @@ export const Card = ({
     onPlus,
     onFavorite,
     isLiked = false,
-    isAdded = false,
+    // isAdded = false,
     isLoading = false,
   }) => {
-  const [isChecked, setIsChecked] = useState(isAdded);
+  // const [isChecked, setIsChecked] = useState(isAdded);
   const [isFavorite, setIsFavorite] = useState(isLiked);
-
-  // const { name, imageUrl, price } = data;
+  const { hasAddedToCart } = useContext(AppContext);
 
   const handleCheck = () => {
     onPlus({ id, name, imageUrl, price });
-    setIsChecked(!isChecked);
+    // setIsChecked(!isChecked);
   };
 
   const handleLike = () => {
@@ -34,18 +34,18 @@ export const Card = ({
         isLoading ?
           <ContentLoader
             speed={2}
-            width={200}
-            height={260}
-            viewBox="0 0 200 260"
+            width={165}
+            height={230}
+            viewBox="0 0 165 230"
             backgroundColor="#f3f3f3"
             foregroundColor="#ecebeb"
             // {...props}
           >
-            <rect x="0" y="0" rx="10" ry="10" width="150" height="90" />
-            <rect x="0" y="165" rx="5" ry="5" width="80" height="24" />
-            <rect x="0" y="106" rx="5" ry="5" width="150" height="15" />
-            <rect x="114" y="160" rx="10" ry="10" width="32" height="32" />
-            <rect x="0" y="125" rx="5" ry="5" width="93" height="15" />
+            <rect x="13" y="10" rx="10" ry="10" width="140" height="100" />
+            <rect x="13" y="175" rx="5" ry="5" width="80" height="24" />
+            <rect x="13" y="115" rx="5" ry="5" width="140" height="15" />
+            <rect x="120" y="167" rx="10" ry="10" width="32" height="32" />
+            <rect x="13" y="135" rx="5" ry="5" width="93" height="15" />
           </ContentLoader>
         :
         <>
@@ -65,7 +65,7 @@ export const Card = ({
             <img
               className={styles.btnImage}
               onClick={handleCheck}
-              src={isChecked ? "./img/check.svg" : "./img/plus.svg"}
+              src={hasAddedToCart(id) ? "./img/check.svg" : "./img/plus.svg"}
               alt="Плюс" />
             {/* <div className={`${styles.addButton} d-flex`}>
             </div> */}
