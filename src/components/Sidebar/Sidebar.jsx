@@ -1,6 +1,21 @@
+import { useContext, useState } from 'react';
+// import axios from 'axios';
+
+import { SidebarInfo } from '../SidebarInfo/SidebarInfo';
+import { AppContext } from '../../utils/context/context';
+
 import styles from './Sidebar.module.scss';
 
 export const Sidebar = ({onClose, onRemove, items = []}) => {
+  const [isOrdered, setIsOrdered] = useState(false);
+  const { cartItems, setCartItems } = useContext(AppContext);
+
+  const handleClickOrder = () => {
+    // axios.post('https://66abc54ff009b9d5c73049f1.mockapi.io/orders', cartItems); //отправка заказа на сервер
+    setIsOrdered(true);
+    setCartItems([]);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.overlay}>
@@ -39,33 +54,20 @@ export const Sidebar = ({onClose, onRemove, items = []}) => {
                     <p>1074 руб.</p>
                   </li>
                 </ul>
-                <button className={`${styles.submitBtn} d-flex justify-center align-center`}>Оформить заказ
+                <button className={`${styles.submitBtn} d-flex justify-center align-center`} onClick={handleClickOrder}>Оформить заказ
                   <img className={styles.arrow} src="./img/arrow.svg" alt="Стрелка"/>
                 </button>
               </div>
             </>
             :
-            <div className='d-flex flex-column justify-center align-center flex'>
-              <img className={`${styles.emptyCartImage} mb-20`} src="./img/empty_cart.svg" alt="Пустая коробка" />
-              <h3 className={styles.emptyCartTitle}>Корзина пустая</h3>
-              <p className={`${styles.emptyCartText} opacity-5`}>Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ.</p>
-              <button
-                className={`${styles.btnBack} d-flex justify-center align-center mt-40`}
-                onClick={onClose}
-              >Вернуться назад
-                <img className={styles.arrowBack} src="./img/arrow.svg" alt="Стрелка"/>
-              </button>
-            </div>
+            <SidebarInfo
+              title={isOrdered ? "Заказ оформлен!" : "Корзина пустая"}
+              image={isOrdered ? "./img/order_completed.svg" : "./img/empty_cart.svg"}
+              description={isOrdered ? "Ваш заказ #18 скоро будет передан курьерской доставке" : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
+            />
           }
-
-
-
-
-
-
         </div>
       </div>
-
     </div>
   );
 }

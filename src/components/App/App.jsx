@@ -91,7 +91,7 @@ export const App = () => {
   }
 
   return (
-    <AppContext.Provider value={{items, cartItems, favorites, hasAddedToCart}}>
+    <AppContext.Provider value={{items, cartItems, favorites, hasAddedToCart, setIsOpened, setCartItems}}>
       <div className={`${styles.App} clear`}>
         {isOpened &&
           <Sidebar
