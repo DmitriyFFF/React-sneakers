@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Card } from "../../components/Card/Card";
-import styles from "./Favorites.module.scss"
 import { AppContext } from "../../utils/context/context";
+import styles from "./Favorites.module.scss"
 // import { Cards } from "../components/Cards/Cards";
 
-export const Favorites = ({ onAddFavorite }) => {
-  const { favorites } = useContext(AppContext);
+export const Favorites = () => {
+  const { favorites, handleAddFavorites } = useContext(AppContext);
   // console.log(favorites)
   return (
     <div className='d-flex flex-column justify-between mb-30 p-40'>
@@ -16,7 +16,7 @@ export const Favorites = ({ onAddFavorite }) => {
             key={index}
             isLiked={true}
             // onPlus={(card) => {onAddCart(card)}}
-            onFavorite={onAddFavorite}
+            onFavorite={handleAddFavorites}
             {...item}
           />
         )}

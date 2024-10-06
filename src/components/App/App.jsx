@@ -116,7 +116,7 @@ export const App = () => {
   }
 
   return (
-    <AppContext.Provider value={{items, cartItems, favorites, hasAddedToCart, setIsOpened, setCartItems}}>
+    <AppContext.Provider value={{items, cartItems, favorites, hasAddedToCart, handleAddFavorites, setIsOpened, setCartItems}}>
       <div className={`${styles.App} clear`}>
         {isOpened &&
           <Sidebar
@@ -139,7 +139,7 @@ export const App = () => {
           <Route path='/favorites' element={
             <Favorites
               // items={favorites}
-              onAddFavorite={handleAddFavorites}
+              // onAddFavorite={handleAddFavorites}
             />
           }/>
         </Routes>

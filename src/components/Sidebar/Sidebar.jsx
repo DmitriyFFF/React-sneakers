@@ -1,19 +1,39 @@
 import { useContext, useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 import { SidebarInfo } from '../SidebarInfo/SidebarInfo';
 import { AppContext } from '../../utils/context/context';
 
 import styles from './Sidebar.module.scss';
+import { baseUrl, delay } from '../../utils/constants';
 
 export const Sidebar = ({onClose, onRemove, items = []}) => {
   const [isOrdered, setIsOrdered] = useState(false);
+  const [orderId, setOrderId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { cartItems, setCartItems } = useContext(AppContext);
 
-  const handleClickOrder = () => {
+  const handleClickOrder = async () => {
     // axios.post('https://66abc54ff009b9d5c73049f1.mockapi.io/orders', cartItems); //отправка заказа на сервер
-    setIsOrdered(true);
-    setCartItems([]);
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(`${baseUrl}/orders`, {
+        items: cartItems
+      });
+      setOrderId(data.id)
+      setIsOrdered(true);
+      setCartItems([]);
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i];
+        await axios.delete(`${baseUrl}/cart/${item.id}`);
+        await delay(1000);
+      }
+    } catch (error) {
+      alert('Не удалось оформить заказ!');
+      console.log(error);
+    }
+    setIsLoading(false);
   }
 
   return (
@@ -54,7 +74,10 @@ export const Sidebar = ({onClose, onRemove, items = []}) => {
                     <p>1074 руб.</p>
                   </li>
                 </ul>
-                <button className={`${styles.submitBtn} d-flex justify-center align-center`} onClick={handleClickOrder}>Оформить заказ
+                <button
+                  className={`${styles.submitBtn} d-flex justify-center align-center`}
+                  onClick={handleClickOrder}
+                  disabled={isLoading}>Оформить заказ
                   <img className={styles.arrow} src="./img/arrow.svg" alt="Стрелка"/>
                 </button>
               </div>
@@ -63,7 +86,7 @@ export const Sidebar = ({onClose, onRemove, items = []}) => {
             <SidebarInfo
               title={isOrdered ? "Заказ оформлен!" : "Корзина пустая"}
               image={isOrdered ? "./img/order_completed.svg" : "./img/empty_cart.svg"}
-              description={isOrdered ? "Ваш заказ #18 скоро будет передан курьерской доставке" : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
+              description={isOrdered ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
             />
           }
         </div>

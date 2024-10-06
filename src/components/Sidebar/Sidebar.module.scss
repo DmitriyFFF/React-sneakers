@@ -150,6 +150,12 @@
       transition: transform .2s ease-in-out;
     }
 
+    &:disabled {
+      background-color: #bebebe;
+      cursor: default;
+      animation: button-loading .6s ease-in-out infinite;
+    }
+
     &:hover {
       background: lighten(#9DD458, 5%);
       .arrow {
@@ -160,5 +166,16 @@
     &:active {
       background: darken(#9DD458, 5%);
     }
+  }
+}
+@keyframes button-loading {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .7;
+  }
+  100% {
+    opacity: 1;
   }
 }
