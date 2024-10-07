@@ -61,7 +61,14 @@
       "price": 8999
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "7",
+      "name": "Мужские Кроссовки Jordan Air Jordan 11",
+      "imageUrl": "./img/sneakers/sn7.jpg",
+      "price": 16499
+    }
+  ],
   "favorites": [
     {
       "id": "2",

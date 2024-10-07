@@ -2,16 +2,18 @@ import { useContext, useState } from 'react';
 import axios from 'axios';
 
 import { SidebarInfo } from '../SidebarInfo/SidebarInfo';
-import { AppContext } from '../../utils/context/context';
+// import { AppContext } from '../../utils/context/context';
 
 import styles from './Sidebar.module.scss';
 import { baseUrl, delay } from '../../utils/constants';
+import { useCartPrice } from '../../utils/hooks/useCartPrice';
 
 export const Sidebar = ({onClose, onRemove, items = []}) => {
   const [isOrdered, setIsOrdered] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { cartItems, setCartItems } = useContext(AppContext);
+  const { cartItems, setCartItems, totalPrice } = useCartPrice();
+  // const { cartItems, setCartItems } = useContext(AppContext);
 
   const handleClickOrder = async () => {
     // axios.post('https://66abc54ff009b9d5c73049f1.mockapi.io/orders', cartItems); //отправка заказа на сервер
@@ -67,11 +69,11 @@ export const Sidebar = ({onClose, onRemove, items = []}) => {
                 <ul className='mb-25'>
                   <li className={`${styles.orderItem} d-flex justify-between mt-20`}>
                     <p className='opacity-5'>Итого:</p>
-                    <p>21 498 руб.</p>
+                    <p>{totalPrice} руб.</p>
                   </li>
                   <li className={`${styles.orderItem} d-flex justify-between mt-20`}>
                     <p className='opacity-5'>Налог 5%:</p>
-                    <p>1074 руб.</p>
+                    <p>{totalPrice / 100 * 5} руб.</p>
                   </li>
                 </ul>
                 <button

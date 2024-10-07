@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useCartPrice } from '../../utils/hooks/useCartPrice';
 import styles from './Header.module.scss';
 
-export const Header = ({onOpenCart}) => {
+export const Header = ({ onOpenCart }) => {
+  const { totalPrice } = useCartPrice();
   return (
     <header className={`${styles.header} d-flex justify-between align-center p-40`}>
       <Link to='/' className={`${styles.headerLeft} d-flex`}>
@@ -16,7 +18,7 @@ export const Header = ({onOpenCart}) => {
         <li onClick={onOpenCart}>
           <Link to='/' className='d-flex align-center mr-30'>
             <img className={`${styles.icon} mr-10`} src='/img/cart.svg' alt='Корзина' />
-            <span className={styles.price}>1205 руб.</span>
+            <span className={styles.price}>{totalPrice} руб.</span>
           </Link>
         </li>
         <li>
