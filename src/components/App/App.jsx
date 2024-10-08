@@ -11,6 +11,7 @@ import styles from './App.module.scss';
 import { baseUrl, cardsData } from '../../utils/constants';
 import { Favorites } from '../../pages/Favorites/Favorites';
 import { AppContext } from '../../utils/context/context';
+import { Orders } from '../../pages/Orders/Orders';
 
 
 export const App = () => {
@@ -116,7 +117,16 @@ export const App = () => {
   }
 
   return (
-    <AppContext.Provider value={{items, cartItems, favorites, hasAddedToCart, handleAddFavorites, setIsOpened, setCartItems}}>
+    <AppContext.Provider value={{
+        items,
+        cartItems,
+        favorites,
+        hasAddedToCart,
+        handleAddCart,
+        handleAddFavorites,
+        setIsOpened,
+        setCartItems,
+      }}>
       <div className={`${styles.App} clear`}>
         {isOpened &&
           <Sidebar
@@ -142,10 +152,15 @@ export const App = () => {
               // onAddFavorite={handleAddFavorites}
             />
           }/>
+          <Route path='/orders' element={
+            <Orders
+              // items={favorites}
+              // onAddFavorite={handleAddFavorites}
+            />
+          }/>
         </Routes>
       </div>
     </AppContext.Provider>
-
   );
 }
 

@@ -28,9 +28,9 @@ export const Header = ({ onOpenCart }) => {
           </Link>
         </li>
         <li>
-          <Link to='/profile' className='d-flex align-center'>
+          <Link to='/orders' className='d-flex align-center'>
             <img className={`${styles.icon} mr-10`} src='/img/user.svg' alt='Профиль пользователя' />
-            <span className={`${styles.profile} opacity-6`}>Профиль</span>
+            <span className={`${styles.profile} opacity-6`}>Мои Заказы</span>
           </Link>
         </li>
       </ul>

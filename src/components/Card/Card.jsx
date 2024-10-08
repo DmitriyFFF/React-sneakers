@@ -49,12 +49,15 @@ export const Card = ({
           </ContentLoader>
         :
         <>
-          <div className={styles.favorite}>
-            <img
-              onClick={handleLike}
-              src={isFavorite ? "./img/heart_liked.svg" : "./img/heart_unliked.svg"}
-              alt="Лайк" />
-          </div>
+          {onFavorite &&
+            <div className={styles.favorite}>
+              <img
+                onClick={handleLike}
+                src={isFavorite ? "./img/heart_liked.svg" : "./img/heart_unliked.svg"}
+                alt="Лайк"
+              />
+            </div>
+          }
           <img className={styles.cardImage} src={imageUrl} alt="Кроссовки" />
           <h4 className={styles.cardName}>{name}</h4>
           <div className='d-flex justify-between align-center'>
@@ -62,13 +65,14 @@ export const Card = ({
               <span className={`${styles.spanPrice} text-uppercase`}>Цена</span>
               <b>{price} руб.</b>
             </div>
-            <img
-              className={styles.btnImage}
-              onClick={handleCheck}
-              src={hasAddedToCart(id) ? "./img/check.svg" : "./img/plus.svg"}
-              alt="Плюс" />
-            {/* <div className={`${styles.addButton} d-flex`}>
-            </div> */}
+            {onPlus &&
+              <img
+                className={styles.btnImage}
+                onClick={handleCheck}
+                src={hasAddedToCart(id) ? "./img/check.svg" : "./img/plus.svg"}
+                alt="Плюс"
+              />
+            }
           </div>
         </>
       }

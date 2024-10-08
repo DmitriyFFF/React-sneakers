@@ -73,7 +73,7 @@ export const Sidebar = ({onClose, onRemove, items = []}) => {
                   </li>
                   <li className={`${styles.orderItem} d-flex justify-between mt-20`}>
                     <p className='opacity-5'>Налог 5%:</p>
-                    <p>{totalPrice / 100 * 5} руб.</p>
+                    <p>{Math.floor(totalPrice / 100 * 5)} руб.</p>
                   </li>
                 </ul>
                 <button
