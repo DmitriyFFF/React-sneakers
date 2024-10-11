@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
+
 import { AppContext } from '../../utils/context/context';
+
 import styles from './SidebarInfo.module.scss';
 
 export const SidebarInfo = ({ title, image, description }) => {

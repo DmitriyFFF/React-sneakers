@@ -3,15 +3,14 @@ import axios from 'axios';
 import { Routes, Route } from 'react-router-dom';
 
 import { Home } from '../../pages/Home/Home';
+import { Favorites } from '../../pages/Favorites/Favorites';
+import { Orders } from '../../pages/Orders/Orders';
 import { Header } from '../Header/Header';
-// import { Cards } from '../Cards/Cards';
 import { Sidebar } from '../Sidebar/Sidebar';
+import { AppContext } from '../../utils/context/context';
+import { baseUrl } from '../../utils/constants';
 
 import styles from './App.module.scss';
-import { baseUrl, cardsData } from '../../utils/constants';
-import { Favorites } from '../../pages/Favorites/Favorites';
-import { AppContext } from '../../utils/context/context';
-import { Orders } from '../../pages/Orders/Orders';
 
 
 export const App = () => {
@@ -46,19 +45,24 @@ export const App = () => {
   // }, []);
   useEffect(() => {
     async function fetchData() {
-      setIsLoading(true);
-      const cartRes = await fetch(`${baseUrl}/cart`);
-      const cartJson = await cartRes.json();
-      const favRes = await fetch(`${baseUrl}/favorites`);
-      const favJson = await favRes.json();
-      const itemsRes = await fetch(`${baseUrl}/items`);
-      const itemsJson = await itemsRes.json();
+      try {
+        setIsLoading(true);
+        const cartRes = await fetch(`${baseUrl}/cart`);
+        const cartJson = await cartRes.json();
+        const favRes = await fetch(`${baseUrl}/favorites`);
+        const favJson = await favRes.json();
+        const itemsRes = await fetch(`${baseUrl}/items`);
+        const itemsJson = await itemsRes.json();
 
-      setIsLoading(false);
+        setIsLoading(false);
 
-      setCartItems(cartJson);
-      setFavorites(favJson);
-      setItems(itemsJson);
+        setCartItems(cartJson);
+        setFavorites(favJson);
+        setItems(itemsJson);
+      } catch (error) {
+        alert('Ошибка при запросе данных ;(');
+        console.log(error);
+      }
     }
     fetchData();
     // fetch('http://localhost:3000/items')
@@ -75,16 +79,14 @@ export const App = () => {
     //   setIsLoading(false);
   }, []);
 
-  const handleAddCart = (card) => {
-    // axios.post('https://66abc54ff009b9d5c73049f1.mockapi.io/cart', card);
-    // setCartItems((prev) => [...prev, card]);
+  const handleAddCart = async (card) => {
     try {
       if (cartItems.find(item => Number(item.id) === Number(card.id))) {
-        axios.delete(`${baseUrl}/cart/${card.id}`);
         setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(card.id)));
+        await axios.delete(`${baseUrl}/cart/${card.id}`);
       } else {
-        axios.post(`${baseUrl}/cart`, card);
         setCartItems((prev) => [...prev, card]);
+        await axios.post(`${baseUrl}/cart`, card);
       }
     } catch (error) {
       alert('Не удалось добавить в корзину!');
@@ -92,9 +94,14 @@ export const App = () => {
     }
   };
 
-  const handleDeleteFromCart = (id) => {
-    axios.delete(`${baseUrl}/cart/${id}`);
-    setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
+  const handleDeleteFromCart = async (id) => {
+    try {
+      await axios.delete(`${baseUrl}/cart/${id}`);
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
+    } catch (error) {
+      alert('Ошибка при удалении из корзины!');
+      console.log(error);
+    }
   };
 
   const handleAddFavorites = async(card) => {
@@ -128,13 +135,12 @@ export const App = () => {
         setCartItems,
       }}>
       <div className={`${styles.App} clear`}>
-        {isOpened &&
-          <Sidebar
-            items={cartItems}
-            onClose={() => setIsOpened(false)}
-            onRemove={(id) => handleDeleteFromCart(id)}
-          />
-        }
+        <Sidebar
+          items={cartItems}
+          onClose={() => setIsOpened(false)}
+          onRemove={(id) => handleDeleteFromCart(id)}
+          opened={isOpened}
+        />
         <Header onOpenCart={() => setIsOpened(true)} />
         <Routes>
           <Route path='/' element={
@@ -146,18 +152,8 @@ export const App = () => {
               isLoading={isLoading}
             />
           }/>
-          <Route path='/favorites' element={
-            <Favorites
-              // items={favorites}
-              // onAddFavorite={handleAddFavorites}
-            />
-          }/>
-          <Route path='/orders' element={
-            <Orders
-              // items={favorites}
-              // onAddFavorite={handleAddFavorites}
-            />
-          }/>
+          <Route path='/favorites' element={<Favorites />}/>
+          <Route path='/orders' element={<Orders />}/>
         </Routes>
       </div>
     </AppContext.Provider>

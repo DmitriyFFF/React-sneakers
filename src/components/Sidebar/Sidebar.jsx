@@ -1,22 +1,19 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 import { SidebarInfo } from '../SidebarInfo/SidebarInfo';
-// import { AppContext } from '../../utils/context/context';
+import { useCartPrice } from '../../utils/hooks/useCartPrice';
+import { baseUrl, delay } from '../../utils/constants';
 
 import styles from './Sidebar.module.scss';
-import { baseUrl, delay } from '../../utils/constants';
-import { useCartPrice } from '../../utils/hooks/useCartPrice';
 
-export const Sidebar = ({onClose, onRemove, items = []}) => {
+export const Sidebar = ({onClose, onRemove, items = [], opened}) => {
   const [isOrdered, setIsOrdered] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { cartItems, setCartItems, totalPrice } = useCartPrice();
-  // const { cartItems, setCartItems } = useContext(AppContext);
 
   const handleClickOrder = async () => {
-    // axios.post('https://66abc54ff009b9d5c73049f1.mockapi.io/orders', cartItems); //отправка заказа на сервер
     try {
       setIsLoading(true);
       const { data } = await axios.post(`${baseUrl}/orders`, {
@@ -40,7 +37,7 @@ export const Sidebar = ({onClose, onRemove, items = []}) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.overlay}>
+      <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
         <div className={`${styles.content} d-flex flex-column`}>
           <h2 className={`${styles.title} d-flex justify-between align-center mb-30`}>Корзина
             <img className='cu-p' src="./img/removeBtn.svg" alt="Закрыть" onClick={onClose}/>

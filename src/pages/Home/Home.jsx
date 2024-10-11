@@ -1,18 +1,16 @@
-// import { cardsData } from '../../utils/constants';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+
 import { Card } from '../../components/Card/Card';
+
 import styles from './Home.module.scss';
-// import { AppContext } from '../../utils/context/context';
 
 export const Home = ({
     items,
-    // cartItems,
     onAddCart,
     onAddFavorite,
     isLoading,
   }) => {
   const [serchValue, setSearchValue] = useState('');
-  // const {hasAddedToCart} = useContext(AppContext);
 
   const renderItems = () => {
     const filtredItems = items.filter(item => item.name.toLowerCase().includes(serchValue.toLowerCase()));
@@ -24,7 +22,6 @@ export const Home = ({
           onPlus={(cartItem) => onAddCart(cartItem)}
           onFavorite={(cartItem) => onAddFavorite(cartItem)}
           isLoading={isLoading}
-          // isAdded={hasAddedToCart(item && item.id)}
           {...item}
         />
       )
@@ -33,15 +30,12 @@ export const Home = ({
 
   const handleChangeInput = (event) => {
     setSearchValue(event.target.value);
-    // console.log(event.target.value)
   };
 
   const handleClearInput = () => {
     setSearchValue('');
   };
-  // const handleAddCart = (card) => {
-  //   console.log(card)
-  // }
+
   return (
     <div className={`${styles.content} d-flex flex-column p-40`}>
       <div className='d-flex justify-between align-center mb-30'>
@@ -70,24 +64,3 @@ export const Home = ({
     </div>
   )
 }
-
-
-
-
-
-// import { Cards } from "../../components/Cards/Cards";
-// import styles from "./Home.module.scss"
-
-// export const Home = ({ items, cartItems, handleAddCart, handleAddFavorites, isLoading }) => {
-//   return (
-//     <div className={styles.content}>
-//       <Cards
-//         items={items}
-//         cartItems={cartItems}
-//         onAddCart={handleAddCart}
-//         onAddFavorite={handleAddFavorites}
-//         isLoading={isLoading}
-//       />
-//     </div>
-//   )
-// };

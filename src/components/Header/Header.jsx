@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+
 import { useCartPrice } from '../../utils/hooks/useCartPrice';
+
 import styles from './Header.module.scss';
 
 export const Header = ({ onOpenCart }) => {
