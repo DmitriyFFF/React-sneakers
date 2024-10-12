@@ -12,7 +12,6 @@ import { baseUrl } from '../../utils/constants';
 
 import styles from './App.module.scss';
 
-
 export const App = () => {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
