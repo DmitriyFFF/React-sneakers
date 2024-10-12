@@ -17,13 +17,14 @@ export const Card = ({
   }) => {
   const [isFavorite, setIsFavorite] = useState(isLiked);
   const { hasAddedToCart } = useContext(AppContext);
+  const card = { id, name, imageUrl, price };
 
   const handleCheck = () => {
-    onPlus({ id, name, imageUrl, price });
+    onPlus(card);
   };
 
   const handleLike = () => {
-    onFavorite({ id, name, imageUrl, price });
+    onFavorite(card);
     setIsFavorite(!isFavorite);
   };
 

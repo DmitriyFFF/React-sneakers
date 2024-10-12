@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
+
 import { Card } from "../../components/Card/Card";
 import { AppContext } from "../../utils/context/context";
+
 import styles from "./Favorites.module.scss"
 
 export const Favorites = () => {

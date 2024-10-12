@@ -20,38 +20,17 @@ export const App = () => {
   const [isOpened, setIsOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     setIsLoading(true);
-
-  //     const cartRes = await axios.get('https://66abc54ff009b9d5c73049f1.mockapi.io/cart');
-  //     const favRes = await axios.get('https://66abc54ff009b9d5c73049f1.mockapi.io/favorites');
-
-  //     setIsLoading(false);
-
-  //     setCartItems(cartRes.data);
-  //     setFavorites(favRes.data);
-  //     setItems(cardsData);
-  //   }
-
-  //   // axios.get('https://66abc54ff009b9d5c73049f1.mockapi.io/cart')
-  //   // .then(res => setCartItems(res.data));
-
-  //   // axios.get('https://66abc54ff009b9d5c73049f1.mockapi.io/favorites')
-  //   // .then(res => setFavorites(res.data));
-  //   // setItems(items);
-  //   fetchData();
-  // }, []);
   useEffect(() => {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const cartRes = await fetch(`${baseUrl}/cart`);
+        const [cartRes, favRes, itemsRes] = await Promise.all([
+          fetch(`${baseUrl}/cart`),
+          fetch(`${baseUrl}/favorites`),
+          fetch(`${baseUrl}/items`)
+        ]);
         const cartJson = await cartRes.json();
-        const favRes = await fetch(`${baseUrl}/favorites`);
         const favJson = await favRes.json();
-        const itemsRes = await fetch(`${baseUrl}/items`);
         const itemsJson = await itemsRes.json();
 
         setIsLoading(false);
@@ -65,18 +44,6 @@ export const App = () => {
       }
     }
     fetchData();
-    // fetch('http://localhost:3000/items')
-    //   .then(res => res.json())
-    //   .then(data => setItems(data));
-
-    // fetch('http://localhost:3000/cart')
-    //   .then(res => res.json())
-    //   .then(data => setCartItems(data));
-
-    // fetch('http://localhost:3000/favorites')
-    //   .then(res => res.json())
-    //   .then(data => setFavorites(data));
-    //   setIsLoading(false);
   }, []);
 
   const handleAddCart = async (card) => {
@@ -104,7 +71,7 @@ export const App = () => {
     }
   };
 
-  const handleAddFavorites = async(card) => {
+  const handleAddFavorites = async (card) => {
     try {
       if (favorites.find(item => Number(item.id) === Number(card.id))) {
         axios.delete(`${baseUrl}/favorites/${card.id}`);
