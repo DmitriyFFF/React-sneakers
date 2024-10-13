@@ -10,7 +10,7 @@ export const Header = ({ onOpenCart }) => {
   return (
     <header className={`${styles.header} d-flex justify-between align-center p-40`}>
       <Link to='/' className={`${styles.headerLeft} d-flex`}>
-        <img className={styles.logo} src="/img/logo.png" alt="логотип" />
+        <img className={styles.logo} src="img/logo.png" alt="логотип" />
         <div className={styles.headerInfo}>
           <h3 className={`${styles.title} text-uppercase`}>React sneakers</h3>
           <p className={`${styles.text} opacity-5`}>Магазин лучших кроссовок</p>
@@ -19,19 +19,19 @@ export const Header = ({ onOpenCart }) => {
       <ul className='d-flex'>
         <li onClick={onOpenCart}>
           <Link to='/' className='d-flex align-center mr-30'>
-            <img className={`${styles.icon} mr-10`} src='/img/cart.svg' alt='Корзина' />
+            <img className={`${styles.icon} mr-10`} src='img/cart.svg' alt='Корзина' />
             <span className={styles.price}>{totalPrice} руб.</span>
           </Link>
         </li>
         <li>
           <Link to='/favorites' className='d-flex align-center mr-30'>
-            <img className={`${styles.icon} mr-10`} src='/img/favorite.svg' alt='Закладки' />
+            <img className={`${styles.icon} mr-10`} src='img/favorite.svg' alt='Закладки' />
             <span className={`${styles.profile} opacity-6`}>Закладки</span>
           </Link>
         </li>
         <li>
           <Link to='/orders' className='d-flex align-center'>
-            <img className={`${styles.icon} mr-10`} src='/img/user.svg' alt='Профиль пользователя' />
+            <img className={`${styles.icon} mr-10`} src='img/user.svg' alt='Мои Заказы' />
             <span className={`${styles.profile} opacity-6`}>Мои Заказы</span>
           </Link>
         </li>

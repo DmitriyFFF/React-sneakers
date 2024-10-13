@@ -41,7 +41,7 @@ export const Home = ({
       <div className='d-flex justify-between align-center mb-30'>
         <h1 className={styles.title}>{serchValue ? `Поиск по запросу: ${serchValue}` : 'Все кроссовки'}</h1>
         <div className={`${styles.search} d-flex align-items`}>
-          <img src="./img/search.svg" alt="Поиск" />
+          <img src="img/search.svg" alt="Поиск" />
           <input
             className={styles.input}
             onChange={handleChangeInput}
@@ -52,7 +52,7 @@ export const Home = ({
           {serchValue &&
             <img
               className={`${styles.clearBtn} cu-p`}
-              src="./img/removeBtn.svg"
+              src="img/removeBtn.svg"
               alt="Закрыть"
               onClick={handleClearInput}
             />}
