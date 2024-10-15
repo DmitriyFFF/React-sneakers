@@ -23,11 +23,14 @@ export const App = () => {
     async function fetchData() {
       try {
         setIsLoading(true);
-        const [cartRes, favRes, itemsRes] = await Promise.all([
-          fetch(`${baseUrl}/cart`),
-          fetch(`${baseUrl}/favorites`),
-          fetch(`${baseUrl}/items`)
-        ]);
+        const cartRes = await fetch(`${baseUrl}/cart`);
+        const favRes = await fetch(`${baseUrl}/favorites`);
+        const itemsRes = await fetch(`${baseUrl}/items`);
+        // const [cartRes, favRes, itemsRes] = await Promise.all([
+        //   const cartRes = fetch(`${baseUrl}/cart`);
+        //   const favRes = fetch(`${baseUrl}/favorites`);
+        //   const itemsRes = fetch(`${baseUrl}/items`);
+        // ]);
         const cartJson = await cartRes.json();
         const favJson = await favRes.json();
         const itemsJson = await itemsRes.json();

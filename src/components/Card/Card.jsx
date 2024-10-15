@@ -52,7 +52,7 @@ export const Card = ({
             <div className={styles.favorite}>
               <img
                 onClick={handleLike}
-                src={isFavorite ? "img/heart_liked.svg" : "img/heart_unliked.svg"}
+                src={isFavorite ? "/img/heart_liked.svg" : "/img/heart_unliked.svg"}
                 alt="Лайк"
               />
             </div>
@@ -68,7 +68,7 @@ export const Card = ({
               <img
                 className={styles.btnImage}
                 onClick={handleCheck}
-                src={hasAddedToCart(id) ? "img/check.svg" : "img/plus.svg"}
+                src={hasAddedToCart(id) ? "/img/check.svg" : "/img/plus.svg"}
                 alt="Плюс"
               />
             }

@@ -40,7 +40,7 @@ export const Sidebar = ({onClose, onRemove, items = [], opened}) => {
       <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
         <div className={`${styles.content} d-flex flex-column`}>
           <h2 className={`${styles.title} d-flex justify-between align-center mb-30`}>Корзина
-            <img className='cu-p' src="img/removeBtn.svg" alt="Закрыть" onClick={onClose}/>
+            <img className='cu-p' src="/img/removeBtn.svg" alt="Закрыть" onClick={onClose}/>
           </h2>
           {items.length > 0 ?
             <>
@@ -56,7 +56,7 @@ export const Sidebar = ({onClose, onRemove, items = [], opened}) => {
                       <img
                         className={styles.btnImage}
                         onClick={() => onRemove(item.id)}
-                        src="img/removeBtn.svg"
+                        src="/img/removeBtn.svg"
                         alt="Remove" />
                     </button>
                   </li>
@@ -77,14 +77,14 @@ export const Sidebar = ({onClose, onRemove, items = [], opened}) => {
                   className={`${styles.submitBtn} d-flex justify-center align-center`}
                   onClick={handleClickOrder}
                   disabled={isLoading}>Оформить заказ
-                  <img className={styles.arrow} src="img/arrow.svg" alt="Стрелка"/>
+                  <img className={styles.arrow} src="/img/arrow.svg" alt="Стрелка"/>
                 </button>
               </div>
             </>
             :
             <SidebarInfo
               title={isOrdered ? "Заказ оформлен!" : "Корзина пустая"}
-              image={isOrdered ? "img/order_completed.svg" : "img/empty_cart.svg"}
+              image={isOrdered ? "/img/order_completed.svg" : "/img/empty_cart.svg"}
               description={isOrdered ? `Ваш заказ #${orderId} скоро будет передан курьерской доставке` : "Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."}
             />
           }

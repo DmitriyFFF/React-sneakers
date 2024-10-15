@@ -16,7 +16,7 @@ export const SidebarInfo = ({ title, image, description }) => {
         className={`${styles.btnBack} d-flex justify-center align-center mt-40`}
         onClick={() => setIsOpened(false)}
           >Вернуться назад
-        <img className={styles.arrowBack} src="img/arrow.svg" alt="Стрелка"/>
+        <img className={styles.arrowBack} src="/img/arrow.svg" alt="Стрелка"/>
       </button>
     </div>
   )
